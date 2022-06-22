@@ -42,9 +42,7 @@ export default function RequestReset() {
       <h2>Request A Password Reset</h2>
       <Error error={error} />
       <fieldset>
-        {data?.sendUserPasswordResetLink === null && (
-          <p>Success! Check your email for a link.</p>
-        )}
+        {data?.sendUserPasswordResetLink === null && <p>Success!</p>}
         <label htmlFor="email">
           Email
           <input
@@ -56,7 +54,7 @@ export default function RequestReset() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sign In!</button>
+        <button type="submit">Reset!</button>
       </fieldset>
     </Form>
   );
