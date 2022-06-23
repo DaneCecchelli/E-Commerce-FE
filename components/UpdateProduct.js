@@ -67,7 +67,6 @@ export default function UpdateProduct({ id }) {
             price: inputs.price,
           },
         }).catch(console.error);
-        console.log(res);
         // Go to that products page
       }}
     >
