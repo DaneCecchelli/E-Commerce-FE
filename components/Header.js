@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
 import Cart from './Cart';
 import Nav from './Nav';
 import Search from './Search';
@@ -35,6 +38,17 @@ const HeaderStyles = styled.header`
   }
 `;
 
+function ClientOnly({ children, ...delegated }) {
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+  return <div {...delegated}>{children}</div>;
+}
+
 export default function Header() {
   return (
     <HeaderStyles>
@@ -45,7 +59,9 @@ export default function Header() {
         <Nav />
       </div>
       <div className="subBar">
-        <Search />
+        <ClientOnly>
+          <Search />
+        </ClientOnly>
       </div>
       <Cart />
     </HeaderStyles>

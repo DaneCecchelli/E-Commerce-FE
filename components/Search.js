@@ -8,7 +8,7 @@ import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 
 const SEARCH_PRODUCTS_QUERY = gql`
   query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
-    allProducts(
+    searchTerms: allProducts(
       where: {
         OR: [
           { name_contains_i: $searchTerm }
@@ -36,7 +36,7 @@ export default function Search() {
     }
   );
   const items = data?.searchTerms || [];
-  const findItemsButChill = debounce(findItems, 350);
+  const findItemsButChill = debounce(findItems, 100);
   resetIdCounter();
   const {
     isOpen,
