@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
+import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client/react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import Link from 'next/dist/client/link';
+import Link from 'next/link';
 import ErrorMessage from '../components/ErrorMessage';
 import formatMoney from '../lib/formatMoney';
 import OrderItemStyles from '../components/styles/OrderItemStyles';
@@ -51,18 +50,18 @@ export default function OrdersPage() {
   return (
     <div>
       <Head>
-        <title>Your Orders - ({allOrders.length})</title>
+        <title>Your Orders ({allOrders.length})</title>
       </Head>
       <h2>You have {allOrders.length} orders!</h2>
       <OrderUl>
         {allOrders.map((order) => (
           <OrderItemStyles>
-            <Link href={`order/${order.id}`}>
+            <Link href={`/order/${order.id}`}>
               <a>
                 <div className="order-meta">
                   <p>{countItemsInAnOrder(order)} Items</p>
                   <p>
-                    {order.items.length} Products
+                    {order.items.length} Product
                     {order.items.length === 1 ? '' : 's'}
                   </p>
                   <p>{formatMoney(order.total)}</p>

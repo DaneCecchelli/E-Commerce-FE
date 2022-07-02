@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
 import Head from 'next/head';
 import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
@@ -39,16 +38,18 @@ const SINGLE_ITEM_QUERY = gql`
 
 export default function SingleProduct({ id }) {
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
-    variables: { id },
+    variables: {
+      id,
+    },
   });
-  if (loading) return <p>Loading ...</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { Product } = data;
-
+  console.log(Product);
   return (
     <ProductStyles>
       <Head>
-        <title> Sick Fits | {Product.name}</title>
+        <title>Sick Fits | {Product.name}</title>
       </Head>
       <img
         src={Product.photo.image.publicUrlTransformed}
